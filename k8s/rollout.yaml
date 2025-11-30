@@ -1,18 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: quickship-payment
   namespace: default
 spec:
   replicas: 2
+  strategy:
+    blueGreen: 
+      # The service users currently access
+      activeService: quickship-payment-svc
+      # The service ONLY for us to test the new version
+      previewService: quickship-payment-preview
+      # Stop and wait for human approval before switching traffic
+      autoPromotionEnabled: false
   selector:
     matchLabels:
       app: quickship-payment
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -20,16 +23,11 @@ spec:
     spec:
       containers:
       - name: payment-api
+        # We are still on v1 for now. We will change this later to trigger the rollout.
         image: 592109679631.dkr.ecr.us-east-1.amazonaws.com/quickship-payment:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 5000
-          initialDelaySeconds: 5
-          periodSeconds: 10
         resources:
           requests:
             memory: "64Mi"
