@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: payment-api
-        image: .dkr.ecr..amazonaws.com/quickship-payment:v1
+        image: 592109679631.dkr.ecr.us-east-1.amazonaws.com/quickship-payment:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
