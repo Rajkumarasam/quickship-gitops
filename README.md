@@ -98,4 +98,4 @@ Ingress Timeouts: Diagnosed and fixed AWS Security Group rules to allow Load Bal
 
 👨‍💻 Author
 
-Rajkumar Senior DevOps Project Portfolio
+Rajkumar DevOps Project Portfolio
