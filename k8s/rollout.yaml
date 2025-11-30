@@ -24,7 +24,7 @@ spec:
       containers:
       - name: payment-api
         # We are still on v1 for now. We will change this later to trigger the rollout.
-        image: 592109679631.dkr.ecr.us-east-1.amazonaws.com/quickship-payment:v1
+        image: 592109679631.dkr.ecr.us-east-1.amazonaws.com/quickship-payment:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
